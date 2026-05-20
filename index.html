@@ -51,7 +51,7 @@ body{background:#f0f2f5;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh
 .opt input{flex-shrink:0;accent-color:#25d366;width:16px;height:16px;cursor:pointer}
 input[type=text],textarea{width:100%;font-family:inherit;font-size:13px;color:#111;border:1px solid #e9edef;border-radius:10px;padding:9px 12px;outline:none;background:#f0f2f5}
 input[type=text]:focus,textarea:focus{border-color:#25d366;background:#fff}
-textarea{resize:vertical;min-height:60px}
+textarea{resize:vertical;min-height:70px}
 .echelle{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
 .ech-btn{flex:1;min-width:46px;padding:9px 4px;border:1px solid #e9edef;border-radius:10px;text-align:center;cursor:pointer;font-size:12px;font-weight:700;color:#555;background:#f0f2f5;line-height:1.3}
 .ech-btn.on{background:#25d366;color:#fff;border-color:#25d366}
@@ -77,7 +77,7 @@ textarea{resize:vertical;min-height:60px}
   <img src="https://i.ibb.co/GQf9vsMT/Universit-de-Lom-Togo-orientation-bacheliers.jpg" alt="Universite de Lome" />
   <div class="hero-overlay">
     <div class="hero-badge">&#127481;&#127468; Universite de Lome &mdash; Togo</div>
-    <h1>Sondage Academique 2025</h1>
+    <h1>Sondage Academique 2026</h1>
     <p>Surpopulation &middot; Infrastructures &middot; Qualite de la formation</p>
   </div>
 </div>
@@ -157,19 +157,21 @@ var sections = {
       { id:"s5", q:"Niveau d'etudes", t:"radio", o:["Licence 1","Licence 2","Licence 3","Master 1","Master 2","Doctorat"] }
     ]},
     { t: "Surpopulation", qs: [
-      { id:"s6", q:"Combien d'etudiants dans vos cours ?", t:"radio", o:["Moins de 100","Entre 100 et 300","Entre 300 et 600","Plus de 600"] },
+      { id:"s6", q:"Combien d'etudiants estimez-vous dans vos cours ?", t:"radio", o:["Moins de 100","Entre 100 et 300","Entre 300 et 600","Plus de 600"] },
       { id:"s7", q:"La surpopulation gene votre apprentissage ?", t:"radio", o:["Oui, enormement","Oui, un peu","Non, pas vraiment","Non, pas du tout"] },
-      { id:"s8", q:"Problemes causes (plusieurs choix)", t:"check", o:["Impossible de trouver une place","Difficultes a entendre ou voir","Peu d'interactions avec enseignants","Manque de supports","Stress et inconfort","Longues files d'attente"] }
+      { id:"s8", q:"De quelle maniere la surpopulation en salle de cours affecte-t-elle concrètement votre capacite a suivre et a comprendre les cours dispenses ?", t:"long", ph:"Decrivez votre experience..." },
+      { id:"s8b", q:"Avez-vous deja manque un cours faute de place disponible en amphitheatre ?", t:"radio", o:["Oui","Non","Parfois"] },
+      { id:"s8c", q:"Comment arrivez-vous a gerer personnellement les difficultes liees a la surpopulation pour maintenir un bon niveau academique ?", t:"long", ph:"Decrivez vos strategies personnelles..." }
     ]},
     { t: "Infrastructures", qs: [
       { id:"s9", q:"Etat des salles de cours", t:"echelle", labels:["Tres mauvais","Mauvais","Moyen","Bon","Excellent"] },
       { id:"s10", q:"Acces a la bibliotheque ?", t:"radio", o:["Oui, bien equipee","Oui, mais limitee","Non, pas acces"] },
       { id:"s11", q:"Acces a Internet sur le campus ?", t:"radio", o:["Oui, stable et gratuit","Oui, mais instable","Non, aucun acces"] },
-      { id:"s12", q:"Ce qui manque le plus (plusieurs choix)", t:"check", o:["Salles supplementaires","Laboratoires","Residences","Restaurants","Sanitaires","Internet fiable"] }
+      { id:"s12", q:"Parmi les ameliorations suivantes, lesquelles vous semblent les plus urgentes a l'Universite de Lome ?", t:"check", o:["Construire de nouvelles salles","Ameliorer la bibliotheque","Developper l'acces a internet","Recruter plus d'enseignants","Limiter les inscriptions"] }
     ]},
     { t: "Formation", qs: [
-      { id:"s13", q:"Qualite globale de la formation", t:"echelle", labels:["Tres faible","Faible","Moyen","Bon","Excellent"] },
-      { id:"s14", q:"Programmes adaptes au marche de l'emploi ?", t:"radio", o:["Oui, tres bien","Partiellement","Peu adaptes","Pas du tout"] },
+      { id:"s13", q:"Etes-vous satisfait(e) de la qualite de la formation recue a l'Universite de Lome compte tenu des conditions actuelles ?", t:"radio", o:["Tres satisfait","Satisfait","Peu satisfait","Pas du tout satisfait"] },
+      { id:"s14", q:"Les programmes sont-ils adaptes au marche de l'emploi au Togo ?", t:"radio", o:["Oui, tres bien","Partiellement","Peu adaptes","Pas du tout"] },
       { id:"s15", q:"Regularite des enseignants", t:"radio", o:["Toujours reguliers","Souvent","Rarement","Tres irreguliers"] },
       { id:"s16", q:"Ameliorations souhaitees en priorite", t:"long", ph:"Vos suggestions..." }
     ]}
@@ -183,16 +185,17 @@ var sections = {
     { t: "Surpopulation", qs: [
       { id:"p4", q:"Effectif moyen dans vos cours", t:"radio", o:["Moins de 100","100 a 300","300 a 600","Plus de 600"] },
       { id:"p5", q:"La surpopulation affecte votre enseignement ?", t:"radio", o:["Oui, tres fortement","Oui, assez","Un peu","Non"] },
-      { id:"p6", q:"Defis concrets (plusieurs choix)", t:"check", o:["Difficultes d'evaluation","Manque de temps par etudiant","Logistique lourde","Amphitheatres inadaptes","Impossibilite de TP"] }
+      { id:"p6", q:"Defis concrets rencontres (plusieurs choix)", t:"check", o:["Difficultes d'evaluation individuelle","Manque de temps par etudiant","Logistique lourde","Amphitheatres inadaptes","Impossibilite de TP"] },
+      { id:"p6b", q:"Comment gerez-vous personnellement les defis lies a la surpopulation dans votre enseignement ?", t:"long", ph:"Decrivez vos approches..." }
     ]},
     { t: "Infrastructures", qs: [
-      { id:"p7", q:"Adequation de vos equipements", t:"echelle", labels:["Pas du tout","Tres peu","Partiellement","Bien equipe","Tres bien"] },
-      { id:"p8", q:"Infrastructures les plus urgentes", t:"check", o:["Nouvelles salles","Laboratoires","Bureaux enseignants","Outils numeriques","Internet fiable"] }
+      { id:"p7", q:"Adequation de vos equipements de travail", t:"echelle", labels:["Pas du tout","Tres peu","Partiellement","Bien equipe","Tres bien"] },
+      { id:"p8", q:"Parmi les ameliorations suivantes, lesquelles vous semblent les plus urgentes ?", t:"check", o:["Construire de nouvelles salles","Ameliorer la bibliotheque","Developper l'acces a internet","Recruter plus d'enseignants","Limiter les inscriptions"] }
     ]},
     { t: "Formation", qs: [
-      { id:"p9", q:"Qualite globale de la formation", t:"echelle", labels:["Tres faible","Faible","Moyen","Bon","Excellent"] },
-      { id:"p10", q:"Les programmes sont-ils mis a jour ?", t:"radio", o:["Oui, regulierement","Rarement","Jamais","Je ne sais pas"] },
-      { id:"p11", q:"Reformes que vous proposez", t:"long", ph:"Vos propositions..." }
+      { id:"p9", q:"Etes-vous satisfait(e) de la qualite de la formation dispensee a l'UL compte tenu des conditions actuelles ?", t:"radio", o:["Tres satisfait","Satisfait","Peu satisfait","Pas du tout satisfait"] },
+      { id:"p10", q:"Les programmes sont-ils regulierement mis a jour ?", t:"radio", o:["Oui, regulierement","Rarement","Jamais","Je ne sais pas"] },
+      { id:"p11", q:"Reformes que vous proposez pour ameliorer la formation", t:"long", ph:"Vos propositions..." }
     ]}
   ],
   admin: [
@@ -200,18 +203,21 @@ var sections = {
       { id:"a1", q:"Votre fonction", t:"text", ph:"Ex : Scolarite, Doyen, RH..." },
       { id:"a2", q:"Annees de service a l'UL", t:"radio", o:["Moins de 3 ans","3 a 10 ans","10 a 20 ans","Plus de 20 ans"] }
     ]},
-    { t: "Gestion effectifs", qs: [
-      { id:"a3", q:"Flux moyen d'etudiants geres", t:"radio", o:["Moins de 500","500 a 2000","2000 a 5000","Plus de 5000"] },
-      { id:"a4", q:"Outils pour gerer les effectifs ?", t:"radio", o:["Oui, outils numeriques","Oui, mais insuffisants","Non, gestion manuelle"] },
-      { id:"a5", q:"Politique de limitation des admissions ?", t:"radio", o:["Oui, appliquee","Oui, mais peu respectee","Non"] }
+    { t: "Surpopulation", qs: [
+      { id:"a3", q:"Flux moyen d'etudiants que vous gerez", t:"radio", o:["Moins de 500","500 a 2000","2000 a 5000","Plus de 5000"] },
+      { id:"a4", q:"Outils disponibles pour gerer les effectifs ?", t:"radio", o:["Oui, outils numeriques performants","Oui, mais insuffisants","Non, gestion manuelle"] },
+      { id:"a5", q:"Politique de limitation des admissions ?", t:"radio", o:["Oui, appliquee strictement","Oui, mais peu respectee","Non"] },
+      { id:"a5b", q:"Comment l'administration gere-t-elle concrètement les defis lies a la surpopulation ?", t:"long", ph:"Decrivez les mesures prises..." }
     ]},
     { t: "Infrastructures", qs: [
-      { id:"a6", q:"Adequation des infrastructures", t:"echelle", labels:["Tres inadaptees","Inadaptees","Moyennement","Adaptees","Tres adaptees"] },
-      { id:"a7", q:"Budget alloue suffisant ?", t:"radio", o:["Oui, tres suffisant","Partiellement","Insuffisant","Tres insuffisant"] }
+      { id:"a6", q:"Adequation des infrastructures aux besoins actuels", t:"echelle", labels:["Tres inadaptees","Inadaptees","Moyennement","Adaptees","Tres adaptees"] },
+      { id:"a7", q:"Budget alloue aux infrastructures suffisant ?", t:"radio", o:["Oui, tres suffisant","Partiellement","Insuffisant","Tres insuffisant"] },
+      { id:"a7b", q:"Parmi les ameliorations suivantes, lesquelles vous semblent les plus urgentes ?", t:"check", o:["Construire de nouvelles salles","Ameliorer la bibliotheque","Developper l'acces a internet","Recruter plus d'enseignants","Limiter les inscriptions"] }
     ]},
     { t: "Qualite", qs: [
-      { id:"a8", q:"Reformes recommandees", t:"long", ph:"Vos recommandations..." },
-      { id:"a9", q:"Observations generales", t:"long", ph:"Remarques libres..." }
+      { id:"a8", q:"Etes-vous satisfait(e) de la qualite de la formation dispensee a l'UL compte tenu des conditions actuelles ?", t:"radio", o:["Tres satisfait","Satisfait","Peu satisfait","Pas du tout satisfait"] },
+      { id:"a9", q:"Reformes institutionnelles recommandees", t:"long", ph:"Vos recommandations..." },
+      { id:"a10", q:"Observations generales sur la situation a l'UL", t:"long", ph:"Remarques libres..." }
     ]}
   ]
 };
@@ -400,3 +406,4 @@ function copier() {
 </script>
 </body>
 </html>
+
