@@ -426,34 +426,16 @@ function envoyerReponses() {
     else if (ech) data[id] = ech.textContent.trim();
   });
 
-  // Utiliser no-cors pour eviter le blocage CORS
-  var url = "https://script.google.com/macros/s/AKfycbw1aNgPt4ZfmgqTk2XdhR2Rfrot1PGyaWdTrvKJbUDs3Mbobx7pceEITILaW94MFAd_/exec";
-  
-  // Methode 1 : Form data (contourne CORS)
-  var form = document.createElement("form");
-  form.method = "POST";
-  form.action = url;
-  form.target = "hidden_iframe";
-  form.style.display = "none";
-  
-  var input = document.createElement("input");
-  input.type = "hidden";
-  input.name = "data";
-  input.value = JSON.stringify(data);
-  form.appendChild(input);
-  
-  var iframe = document.getElementById("hidden_iframe");
-  if (!iframe) {
-    iframe = document.createElement("iframe");
-    iframe.name = "hidden_iframe";
-    iframe.id = "hidden_iframe";
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
+  // Envoyer via GET pour eviter CORS
+  var base = "https://script.google.com/macros/s/AKfycbw1aNgPt4ZfmgqTk2XdhR2Rfrot1PGyaWdTrvKJbUDs3Mbobx7pceEITILaW94MFAd_/exec";
+  var params = [];
+  for (var key in data) {
+    params.push(encodeURIComponent(key) + "=" + encodeURIComponent(data[key]));
   }
-  
-  document.body.appendChild(form);
-  form.submit();
-  document.body.removeChild(form);
+  var url = base + "?" + params.join("&");
+
+  var img = new Image();
+  img.src = url;
 }
 </script>
 </body>
