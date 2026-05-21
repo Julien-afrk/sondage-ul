@@ -425,7 +425,7 @@ function envoyerReponses() {
     }
     else if (ech) data[id] = ech.textContent.trim();
   });
-  fetch("https://formspree.io/f/mjgzwgpp", {
+  fetch("https://script.google.com/macros/s/AKfycbw1aNgPt4ZfmgqTk2XdhR2Rfrot1PGyaWdTrvKJbUDs3Mbobx7pceEITILaW94MFAd_/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Accept": "application/json" },
     body: JSON.stringify(data)
@@ -434,4 +434,3 @@ function envoyerReponses() {
 </script>
 </body>
 </html>
-
