@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -389,6 +388,7 @@ function retour() {
 }
 
 function soumettre() {
+  envoyerReponses();
   document.getElementById("sc-sondage").classList.add("hidden");
   document.getElementById("sc-merci").classList.remove("hidden");
   window.scrollTo(0, 0);
@@ -404,6 +404,34 @@ function copier() {
     });
   }
 }
+
+function envoyerReponses() {
+  var data = { profil: profil };
+  var cards = document.querySelectorAll(".qcard");
+  cards.forEach(function(card) {
+    var id = card.getAttribute("data-id");
+    var radio = card.querySelector("input[type=radio]:checked");
+    var ta = card.querySelector("textarea");
+    var txt = card.querySelector("input[type=text]");
+    var checks = card.querySelectorAll("input[type=checkbox]:checked");
+    var ech = card.querySelector(".ech-btn.on");
+    if (radio) data[id] = radio.parentNode.textContent.trim();
+    else if (ta && ta.value.trim()) data[id] = ta.value.trim();
+    else if (txt && txt.value.trim()) data[id] = txt.value.trim();
+    else if (checks.length) {
+      var vals = [];
+      checks.forEach(function(c){ vals.push(c.parentNode.textContent.trim()); });
+      data[id] = vals.join(", ");
+    }
+    else if (ech) data[id] = ech.textContent.trim();
+  });
+  fetch("https://formspree.io/f/mjgzwgpp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify(data)
+  });
+}
 </script>
 </body>
 </html>
+
