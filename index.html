@@ -1,252 +1,382 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sondage - Université de Lomé 2026</title>
-
+<title>Sondage - Universite de Lome 2026</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  background:#f0f2f5;
-  font-family:'Segoe UI',Arial,sans-serif;
-  display:flex;
-  justify-content:center;
-  min-height:100vh;
-  padding-bottom:40px;
-}
-
-.app{max-width:700px;width:100%}
-
-/* HERO */
-.hero{position:relative;height:220px;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.8));
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  color:#fff;text-align:center;padding:10px
-}
-.hero h1{font-size:22px;font-weight:800}
-.hero p{font-size:13px;color:#ffe}
-
-.flag-bar{display:flex;height:5px}
-.f1{flex:1;background:#006b3d}
-.f2{flex:1;background:#ffce00}
-.f3{flex:1;background:#d21034}
-
-/* CARD */
-.card{
-  background:#fff;margin:10px;border-radius:12px;
-  padding:15px;box-shadow:0 2px 6px rgba(0,0,0,.08)
-}
-
-.hidden{display:none}
-
-/* PROFIL */
-.profil-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  padding:10px
-}
-.pc{
-  background:#fff;border:2px solid #eee;
-  border-radius:12px;padding:15px;text-align:center;
-  cursor:pointer;transition:.2s
-}
+body{background:#f0f2f5;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh;display:flex;justify-content:center;padding:0 0 40px}
+.app{max-width:660px;width:100%;background:#f0f2f5}
+.hero{position:relative;height:210px;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,30,15,0.3) 0%,rgba(0,20,10,0.82) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.hero-badge{background:#ffce00;color:#111;font-size:11px;font-weight:800;padding:5px 16px;border-radius:30px;margin-bottom:10px}
+.hero h1{font-size:20px;font-weight:800;color:#fff;text-align:center;margin-bottom:5px;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.hero p{font-size:12px;color:#ffe88a;text-align:center}
+.flag-bar{height:5px;display:flex}
+.f1{flex:1;background:#006c35}.f2{flex:1;background:#ffce00}.f3{flex:1;background:#cc1f30}
+.card{background:#fff;border-radius:12px;padding:1rem 1.1rem;margin:10px 10px 0;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.hidden{display:none!important}
+.intro{font-size:13px;color:#555;line-height:1.7}
+.intro strong{color:#006c35}
+.ptitle{font-size:13px;font-weight:700;color:#111;margin:14px 10px 8px}
+.profil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 10px}
+.pc{background:#fff;border-radius:12px;border:2px solid #e9edef;padding:1rem .6rem;text-align:center;cursor:pointer;transition:all .2s;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.pc:hover{border-color:#25d366}
 .pc.sel{border-color:#25d366;background:#f0fff4}
-
-/* BUTTON */
-.btn{
-  background:#25d366;color:#fff;
-  border:none;padding:12px;border-radius:10px;
-  width:calc(100% - 20px);margin:10px;
-  font-weight:700;cursor:pointer
-}
-
-/* QUESTIONS */
-.qcard{
-  background:#fff;margin:10px;border-radius:12px;
-  padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)
-}
-.qtitle{font-weight:700;margin-bottom:10px}
-
-.opt{
-  display:flex;gap:10px;
-  padding:8px;background:#f4f4f4;
-  border-radius:8px;margin-bottom:6px;
-  cursor:pointer
-}
-
-input[type=text],textarea{
-  width:100%;padding:10px;border-radius:10px;
-  border:1px solid #ddd
-}
-
-/* PROGRESS */
-.progress{
-  background:#ddd;height:6px;border-radius:10px;margin:10px
-}
-.bar{height:6px;background:#25d366;width:0%}
-
-/* THANK YOU */
-.thanks{
-  text-align:center;padding:40px
-}
+.pc-ico{font-size:30px;display:block;margin-bottom:7px}
+.pc-lbl{font-size:12px;font-weight:700;color:#111;margin-bottom:2px}
+.pc-sub{font-size:10px;color:#8696a0}
+.btn-start{display:block;width:calc(100% - 20px);margin:10px;background:#25d366;color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-start:hover{background:#20bc5a}
+.err{font-size:12px;color:#cc1f30;text-align:center;padding:0 10px 8px;display:none;font-weight:600}
+.nav{background:#fff;display:flex;border-bottom:1px solid #e9edef;overflow-x:auto;margin:10px 10px 0;border-radius:12px 12px 0 0}
+.ntab{flex:1;min-width:70px;padding:10px 4px 9px;border:none;background:none;cursor:pointer;font-size:10px;font-weight:700;color:#8696a0;border-bottom:2px solid transparent;font-family:inherit;white-space:nowrap;text-align:center}
+.ntab.on{color:#25d366;border-bottom-color:#25d366}
+.prog-card{background:#fff;border-radius:0 0 12px 12px;padding:10px 14px;margin:0 10px 8px}
+.prog-hd{display:flex;justify-content:space-between;font-size:11px;color:#8696a0;margin-bottom:5px;font-weight:600}
+.prog-bg{height:5px;background:#e9edef;border-radius:3px;overflow:hidden}
+.prog-bar{height:5px;background:#25d366;border-radius:3px;transition:width .4s}
+.qwrap{padding:0 10px 10px}
+.sect-lbl{font-size:11px;font-weight:700;color:#8696a0;letter-spacing:.07em;text-transform:uppercase;padding:14px 0 6px}
+.qcard{background:#fff;border-radius:12px;padding:1rem;margin-bottom:6px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.qh{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.qnum{width:24px;height:24px;border-radius:50%;background:#25d366;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;margin-top:1px}
+.qt{font-size:14px;font-weight:600;color:#111;line-height:1.4;flex:1}
+.bdg{font-size:10px;padding:2px 7px;border-radius:20px;margin-left:6px;font-weight:700;vertical-align:middle;background:#e9edef;color:#555}
+.opt{display:flex;align-items:center;gap:10px;font-size:13px;color:#111;padding:9px 10px;border-radius:10px;cursor:pointer;margin-bottom:3px;background:#f0f2f5}
+.opt:hover{background:#e9edef}
+.opt input{flex-shrink:0;accent-color:#25d366;width:16px;height:16px;cursor:pointer}
+input[type=text],textarea{width:100%;font-family:inherit;font-size:13px;color:#111;border:1px solid #e9edef;border-radius:10px;padding:9px 12px;outline:none;background:#f0f2f5}
+input[type=text]:focus,textarea:focus{border-color:#25d366;background:#fff}
+textarea{resize:vertical;min-height:70px}
+.echelle{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.ech-btn{flex:1;min-width:46px;padding:9px 4px;border:1px solid #e9edef;border-radius:10px;text-align:center;cursor:pointer;font-size:12px;font-weight:700;color:#555;background:#f0f2f5;line-height:1.3}
+.ech-btn.on{background:#25d366;color:#fff;border-color:#25d366}
+.ech-lbl{font-size:9px;display:block;font-weight:500;margin-top:2px}
+.btn-row{display:flex;gap:8px;padding:10px;flex-wrap:wrap}
+.btn-back{background:#fff;color:#555;border:1px solid #e9edef;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-submit{background:#25d366;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;flex:1}
+.share-card{background:#fff;border-radius:12px;padding:1rem 1.1rem;margin:0 10px 10px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.link-box{background:#f0f2f5;border-radius:8px;padding:9px 12px;font-size:11px;color:#555;word-break:break-all;font-family:monospace;margin-bottom:8px}
+.copy-btn{background:#25d366;color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.copy-ok{font-size:12px;color:#25d366;margin-top:6px;display:none;font-weight:700}
+.merci{background:#fff;border-radius:12px;margin:10px;padding:3rem 1.5rem;text-align:center}
+.merci-ico{font-size:56px;display:block;margin-bottom:1rem}
+.merci h2{font-size:22px;font-weight:800;color:#111;margin-bottom:10px}
+.merci p{font-size:13px;color:#555;line-height:1.8;margin-bottom:1.5rem}
+.flag-mini{display:flex;height:5px;border-radius:3px;overflow:hidden;width:70px;margin:0 auto 1.5rem}
 </style>
 </head>
-
 <body>
-
 <div class="app">
-
-<!-- HERO -->
 <div class="hero">
-  <img src="https://i.ibb.co/GQf9vsMT/Universit-de-Lom-Togo-orientation-bacheliers.jpg">
+  <img src="https://i.ibb.co/GQf9vsMT/Universit-de-Lom-Togo-orientation-bacheliers.jpg" alt="Universite de Lome" />
   <div class="hero-overlay">
-    <h1>Sondage UL 2026</h1>
-    <p>Surpopulation • Infrastructures • Formation</p>
+    <div class="hero-badge">Universite de Lome - Togo</div>
+    <h1>Sondage Academique 2026</h1>
+    <p>Surpopulation - Infrastructures - Qualite de la formation</p>
   </div>
 </div>
-
 <div class="flag-bar"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
-
-<!-- PROFIL -->
-<div id="profilPage">
-  <div class="card">
-    Choisissez votre profil pour commencer
-  </div>
-
+<div id="sc-profil">
+  <div class="card"><div class="intro">Bienvenue ! Ce sondage etudie les conditions d'etudes a l'Universite de Lome. Vos reponses sont <strong>100% anonymes</strong>. Duree : <strong>5 minutes</strong>.</div></div>
+  <div class="ptitle">Selectionnez votre profil pour commencer</div>
   <div class="profil-grid">
-    <div class="pc" onclick="pick('etudiant')" id="etudiant">🎓 Étudiant</div>
-    <div class="pc" onclick="pick('prof')" id="prof">📚 Enseignant</div>
-    <div class="pc" onclick="pick('admin')" id="admin">🏛️ Admin</div>
+    <div class="pc" id="pc-etudiant" onclick="pick('etudiant')"><span class="pc-ico">&#127891;</span><div class="pc-lbl">Etudiant(e)</div><div class="pc-sub">Actuel(le) ou ancien(ne)</div></div>
+    <div class="pc" id="pc-prof" onclick="pick('prof')"><span class="pc-ico">&#128218;</span><div class="pc-lbl">Enseignant(e)</div><div class="pc-sub">Professeur, assistant</div></div>
+    <div class="pc" id="pc-admin" onclick="pick('admin')"><span class="pc-ico">&#127963;</span><div class="pc-lbl">Administration</div><div class="pc-sub">Personnel administratif</div></div>
   </div>
-
-  <button class="btn" onclick="start()">Commencer</button>
+  <button class="btn-start" onclick="demarrer()">Commencer</button>
+  <div class="err" id="err">Veuillez choisir votre profil.</div>
 </div>
-
-<!-- SURVEY -->
-<div id="surveyPage" class="hidden">
-
-<div class="progress"><div class="bar" id="bar"></div></div>
-
-<div id="questions"></div>
-
-<button class="btn" onclick="submit()">Envoyer</button>
-
+<div id="sc-sondage" class="hidden">
+  <div class="nav" id="nav-tabs"></div>
+  <div class="prog-card">
+    <div class="prog-hd"><span id="prog-lbl">0 / 0 questions</span><span id="prog-pct" style="color:#25d366;font-weight:800">0%</span></div>
+    <div class="prog-bg"><div class="prog-bar" id="pbar" style="width:0%"></div></div>
+  </div>
+  <div class="qwrap" id="qcontainer"></div>
+  <div class="btn-row">
+    <button class="btn-back" onclick="retour()">Changer de profil</button>
+    <button class="btn-submit" onclick="soumettre()">Soumettre mes reponses</button>
+  </div>
+  <div class="share-card">
+    <div style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px">Partager ce sondage</div>
+    <div style="font-size:12px;color:#8696a0;margin-bottom:8px">Un seul lien pour tout le monde.</div>
+    <div class="link-box" id="share-url"></div>
+    <button class="copy-btn" onclick="copier()">Copier le lien</button>
+    <div class="copy-ok" id="copy-ok">Copie !</div>
+  </div>
 </div>
-
-<!-- THANK YOU -->
-<div id="thanks" class="hidden thanks">
-  <h2>Merci 🙏</h2>
-  <p>Réponses enregistrées</p>
+<div id="sc-merci" class="hidden">
+  <div class="merci">
+    <span class="merci-ico">&#127891;</span>
+    <div class="flag-mini"><div class="f1"></div><div class="f2"></div><div class="f3"></div></div>
+    <h2>Merci pour votre participation !</h2>
+    <p>Vos reponses contribueront a ameliorer les conditions d'etudes a l'Universite de Lome.</p>
+    <button class="btn-start" onclick="retour()">Faire remplir a quelqu'un d'autre</button>
+  </div>
 </div>
-
 </div>
-
 <script>
+var profil = null;
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1aNgPt4ZfmgqTk2XdhR2Rfrot1PGyaWdTrvKJbUDs3Mbobx7pceEITILaW94MFAd_/exec";
 
-let profil=null;
-
-const data={
- etudiant:[
-  {q:"Ton âge ?",t:"text"},
-  {q:"Surpopulation en cours ?",t:"radio",o:["Oui","Non","Un peu"]},
-  {q:"Qualité des salles ?",t:"radio",o:["Mauvaise","Moyenne","Bonne"]}
- ],
- prof:[
-  {q:"Années d'expérience ?",t:"radio",o:["<3","3-10","10+"]},
-  {q:"Effectif étudiants ?",t:"radio",o:["<100","100-300","300+"]}
- ],
- admin:[
-  {q:"Gestion des effectifs ?",t:"radio",o:["Bonne","Moyenne","Difficile"]}
- ]
+var sections = {
+  etudiant: [
+    { t: "Profil", qs: [
+      { id:"s1", q:"Statut actuel a l UL ?", t:"radio", o:["Etudiant(e) actuellement inscrit(e)", "Ancien(ne) etudiant(e)"] },
+      { id:"s2", q:"Votre age", t:"text", ph:"Ex : 22" },
+      { id:"s3", q:"Votre genre", t:"radio", o:["Masculin", "Feminin", "Prefere ne pas repondre"] },
+      { id:"s4", q:"Faculte ou departement", t:"text", ph:"Ex : FASEG, FDS, FLESH, FDD..." },
+      { id:"s5", q:"Niveau d etudes", t:"radio", o:["Licence 1","Licence 2","Licence 3","Master 1","Master 2","Doctorat"] }
+    ]},
+    { t: "Surpopulation", qs: [
+      { id:"s6", q:"Combien d etudiants estimez-vous dans vos cours ?", t:"radio", o:["Moins de 100","Entre 100 et 300","Entre 300 et 600","Plus de 600"] },
+      { id:"s7", q:"La surpopulation gene votre apprentissage ?", t:"radio", o:["Oui, enormement","Oui, un peu","Non, pas vraiment","Non, pas du tout"] },
+      { id:"s8", q:"De quelle maniere la surpopulation affecte-t-elle votre capacite a suivre et comprendre les cours ?", t:"long", ph:"Decrivez votre experience..." },
+      { id:"s8b", q:"Avez-vous deja manque un cours faute de place disponible en amphitheatre ?", t:"radio", o:["Oui","Non","Parfois"] },
+      { id:"s8c", q:"Comment gerez-vous les difficultes liees a la surpopulation pour maintenir un bon niveau academique ?", t:"long", ph:"Decrivez vos strategies..." }
+    ]},
+    { t: "Infrastructures", qs: [
+      { id:"s9", q:"Etat des salles de cours", t:"echelle", labels:["Tres mauvais","Mauvais","Moyen","Bon","Excellent"] },
+      { id:"s10", q:"Acces a la bibliotheque ?", t:"radio", o:["Oui, bien equipee","Oui, mais limitee","Non, pas acces"] },
+      { id:"s11", q:"Acces a Internet sur le campus ?", t:"radio", o:["Oui, stable et gratuit","Oui, mais instable","Non, aucun acces"] },
+      { id:"s12", q:"Parmi les ameliorations suivantes, lesquelles vous semblent les plus urgentes a l Universite de Lome ?", t:"check", o:["Construire de nouvelles salles","Ameliorer la bibliotheque","Developper l acces a internet","Recruter plus d enseignants","Limiter les inscriptions"] }
+    ]},
+    { t: "Formation", qs: [
+      { id:"s13", q:"Etes-vous satisfait(e) de la qualite de la formation recue a l Universite de Lome compte tenu des conditions actuelles ?", t:"radio", o:["Tres satisfait","Satisfait","Peu satisfait","Pas du tout satisfait"] },
+      { id:"s14", q:"Les programmes sont-ils adaptes au marche de l emploi au Togo ?", t:"radio", o:["Oui, tres bien","Partiellement","Peu adaptes","Pas du tout"] },
+      { id:"s15", q:"Regularite des enseignants", t:"radio", o:["Toujours reguliers","Souvent","Rarement","Tres irreguliers"] },
+      { id:"s16", q:"Ameliorations souhaitees en priorite", t:"long", ph:"Vos suggestions..." }
+    ]}
+  ],
+  prof: [
+    { t: "Profil", qs: [
+      { id:"p1", q:"Grade ou fonction", t:"radio", o:["Professeur titulaire","Maitre de conferences","Assistant","Vacataire","Autre"] },
+      { id:"p2", q:"Annees d exercice a l UL", t:"radio", o:["Moins de 3 ans","3 a 10 ans","10 a 20 ans","Plus de 20 ans"] },
+      { id:"p3", q:"Faculte ou departement", t:"text", ph:"Ex : FASEG, FDS..." }
+    ]},
+    { t: "Surpopulation", qs: [
+      { id:"p4", q:"Effectif moyen dans vos cours", t:"radio", o:["Moins de 100","100 a 300","300 a 600","Plus de 600"] },
+      { id:"p5", q:"La surpopulation affecte votre enseignement ?", t:"radio", o:["Oui, tres fortement","Oui, assez","Un peu","Non"] },
+      { id:"p6", q:"Defis concrets rencontres (plusieurs choix)", t:"check", o:["Difficultes d evaluation individuelle","Manque de temps par etudiant","Logistique lourde","Amphitheatres inadaptes","Impossibilite de TP"] },
+      { id:"p6b", q:"Comment gerez-vous les defis lies a la surpopulation dans votre enseignement ?", t:"long", ph:"Decrivez vos approches..." }
+    ]},
+    { t: "Infrastructures", qs: [
+      { id:"p7", q:"Adequation de vos equipements de travail", t:"echelle", labels:["Pas du tout","Tres peu","Partiellement","Bien equipe","Tres bien"] },
+      { id:"p8", q:"Infrastructures les plus urgentes (plusieurs choix)", t:"check", o:["Construire de nouvelles salles","Ameliorer la bibliotheque","Developper l acces a internet","Recruter plus d enseignants","Limiter les inscriptions"] }
+    ]},
+    { t: "Formation", qs: [
+      { id:"p9", q:"Etes-vous satisfait(e) de la qualite de la formation a l UL compte tenu des conditions actuelles ?", t:"radio", o:["Tres satisfait","Satisfait","Peu satisfait","Pas du tout satisfait"] },
+      { id:"p10", q:"Les programmes sont-ils regulierement mis a jour ?", t:"radio", o:["Oui, regulierement","Rarement","Jamais","Je ne sais pas"] },
+      { id:"p11", q:"Reformes que vous proposez pour ameliorer la formation", t:"long", ph:"Vos propositions..." }
+    ]}
+  ],
+  admin: [
+    { t: "Profil", qs: [
+      { id:"a1", q:"Votre fonction", t:"text", ph:"Ex : Scolarite, Doyen, RH..." },
+      { id:"a2", q:"Annees de service a l UL", t:"radio", o:["Moins de 3 ans","3 a 10 ans","10 a 20 ans","Plus de 20 ans"] }
+    ]},
+    { t: "Surpopulation", qs: [
+      { id:"a3", q:"Flux moyen d etudiants que vous gerez", t:"radio", o:["Moins de 500","500 a 2000","2000 a 5000","Plus de 5000"] },
+      { id:"a4", q:"Outils disponibles pour gerer les effectifs ?", t:"radio", o:["Oui, outils numeriques performants","Oui, mais insuffisants","Non, gestion manuelle"] },
+      { id:"a5", q:"Politique de limitation des admissions ?", t:"radio", o:["Oui, appliquee strictement","Oui, mais peu respectee","Non"] },
+      { id:"a5b", q:"Comment l administration gere-t-elle les defis lies a la surpopulation ?", t:"long", ph:"Decrivez les mesures prises..." }
+    ]},
+    { t: "Infrastructures", qs: [
+      { id:"a6", q:"Adequation des infrastructures aux besoins actuels", t:"echelle", labels:["Tres inadaptees","Inadaptees","Moyennement","Adaptees","Tres adaptees"] },
+      { id:"a7", q:"Budget alloue aux infrastructures suffisant ?", t:"radio", o:["Oui, tres suffisant","Partiellement","Insuffisant","Tres insuffisant"] },
+      { id:"a7b", q:"Infrastructures les plus urgentes (plusieurs choix)", t:"check", o:["Construire de nouvelles salles","Ameliorer la bibliotheque","Developper l acces a internet","Recruter plus d enseignants","Limiter les inscriptions"] }
+    ]},
+    { t: "Qualite", qs: [
+      { id:"a8", q:"Etes-vous satisfait(e) de la qualite de la formation a l UL compte tenu des conditions actuelles ?", t:"radio", o:["Tres satisfait","Satisfait","Peu satisfait","Pas du tout satisfait"] },
+      { id:"a9", q:"Reformes institutionnelles recommandees", t:"long", ph:"Vos recommandations..." },
+      { id:"a10", q:"Observations generales sur la situation a l UL", t:"long", ph:"Remarques libres..." }
+    ]}
+  ]
 };
 
-function pick(p){
- profil=p;
- document.querySelectorAll('.pc').forEach(e=>e.classList.remove('sel'));
- document.getElementById(p).classList.add('sel');
+function pick(p) {
+  profil = p;
+  document.getElementById("pc-etudiant").classList.remove("sel");
+  document.getElementById("pc-prof").classList.remove("sel");
+  document.getElementById("pc-admin").classList.remove("sel");
+  document.getElementById("pc-" + p).classList.add("sel");
+  document.getElementById("err").style.display = "none";
 }
 
-function start(){
- if(!profil) return alert("Choisis un profil");
-
- document.getElementById("profilPage").classList.add("hidden");
- document.getElementById("surveyPage").classList.remove("hidden");
-
- load();
+function demarrer() {
+  if (!profil) { document.getElementById("err").style.display = "block"; return; }
+  buildNav(); buildQs();
+  document.getElementById("sc-profil").classList.add("hidden");
+  document.getElementById("sc-sondage").classList.remove("hidden");
+  document.getElementById("share-url").textContent = window.location.href;
+  updProg();
 }
 
-function load(){
- const box=document.getElementById("questions");
- box.innerHTML="";
-
- data[profil].forEach((q,i)=>{
-
-  let div=document.createElement("div");
-  div.className="qcard";
-
-  let html=`<div class="qtitle">${q.q}</div>`;
-
-  if(q.t==="text"){
-    html+=`<input type="text" data-i="${i}">`;
+function buildNav() {
+  var secs = sections[profil];
+  var html = "";
+  for (var i = 0; i < secs.length; i++) {
+    html += '<button class="ntab' + (i===0?" on":"") + '" onclick="goSect('+i+',this)">' + secs[i].t + '</button>';
   }
+  document.getElementById("nav-tabs").innerHTML = html;
+}
 
-  if(q.t==="radio"){
-    q.o.forEach(o=>{
-      html+=`
-      <label class="opt">
-        <input type="radio" name="q${i}" value="${o}">
-        ${o}
-      </label>`;
+function goSect(i, btn) {
+  document.querySelectorAll(".ntab").forEach(function(t){t.classList.remove("on");});
+  btn.classList.add("on");
+  var el = document.getElementById("sect-"+i);
+  if (el) el.scrollIntoView({behavior:"smooth"});
+}
+
+function buildQs() {
+  var secs = sections[profil];
+  var container = document.getElementById("qcontainer");
+  container.innerHTML = "";
+  var num = 0;
+  for (var si = 0; si < secs.length; si++) {
+    var sec = secs[si];
+    var secDiv = document.createElement("div");
+    secDiv.id = "sect-"+si;
+    var lbl = document.createElement("div");
+    lbl.className = "sect-lbl";
+    lbl.textContent = sec.t;
+    secDiv.appendChild(lbl);
+    for (var qi = 0; qi < sec.qs.length; qi++) {
+      var q = sec.qs[qi]; num++;
+      var card = document.createElement("div");
+      card.className = "qcard"; card.setAttribute("data-id", q.id);
+      var hdr = document.createElement("div"); hdr.className = "qh";
+      var nd = document.createElement("div"); nd.className = "qnum"; nd.textContent = num;
+      hdr.appendChild(nd);
+      var qt = document.createElement("div"); qt.className = "qt"; qt.textContent = q.q;
+      if (q.t==="long"||q.t==="echelle"||q.t==="check") {
+        var bdg = document.createElement("span"); bdg.className = "bdg";
+        bdg.textContent = q.t==="long"?"Texte libre":q.t==="echelle"?"Echelle 1-5":"Plusieurs choix";
+        qt.appendChild(bdg);
+      }
+      hdr.appendChild(qt); card.appendChild(hdr);
+      var body = document.createElement("div");
+      if (q.t==="text") {
+        var inp = document.createElement("input"); inp.type="text"; inp.placeholder=q.ph||"";
+        body.appendChild(inp);
+      } else if (q.t==="long") {
+        var ta = document.createElement("textarea"); ta.placeholder=q.ph||"";
+        body.appendChild(ta);
+      } else if (q.t==="radio") {
+        for (var oi=0; oi<q.o.length; oi++) {
+          var lbl2 = document.createElement("label"); lbl2.className="opt";
+          var r = document.createElement("input"); r.type="radio"; r.name=q.id;
+          lbl2.appendChild(r); lbl2.appendChild(document.createTextNode(" "+q.o[oi]));
+          body.appendChild(lbl2);
+        }
+      } else if (q.t==="check") {
+        for (var oi2=0; oi2<q.o.length; oi2++) {
+          var lbl3 = document.createElement("label"); lbl3.className="opt";
+          var cb = document.createElement("input"); cb.type="checkbox";
+          lbl3.appendChild(cb); lbl3.appendChild(document.createTextNode(" "+q.o[oi2]));
+          body.appendChild(lbl3);
+        }
+      } else if (q.t==="echelle") {
+        var echDiv = document.createElement("div"); echDiv.className="echelle";
+        for (var ei=0; ei<q.labels.length; ei++) {
+          (function(idx, qid, lbl4) {
+            var btn = document.createElement("button"); btn.className="ech-btn";
+            btn.innerHTML = (idx+1)+'<span class="ech-lbl">'+lbl4+"</span>";
+            btn.onclick = function(){ selE(btn, qid); };
+            echDiv.appendChild(btn);
+          })(ei, q.id, q.labels[ei]);
+        }
+        body.appendChild(echDiv);
+      }
+      card.appendChild(body); secDiv.appendChild(card);
+    }
+    container.appendChild(secDiv);
+  }
+}
+
+function selE(btn, id) {
+  document.querySelectorAll('[data-id="'+id+'"] .ech-btn').forEach(function(b){b.classList.remove("on");});
+  btn.classList.add("on"); updProg();
+}
+
+function updProg() {
+  var cards = document.querySelectorAll(".qcard"); var done = 0;
+  for (var i=0; i<cards.length; i++) {
+    var c = cards[i];
+    if (c.querySelector("input[type=radio]:checked")||c.querySelector("input[type=checkbox]:checked")||c.querySelector(".ech-btn.on")) { done++; }
+    else { var t=c.querySelector("input[type=text]"),ta=c.querySelector("textarea"); if((t&&t.value.trim())||(ta&&ta.value.trim())) done++; }
+  }
+  var pct = cards.length?Math.round(done/cards.length*100):0;
+  document.getElementById("pbar").style.width = pct+"%";
+  document.getElementById("prog-pct").textContent = pct+"%";
+  document.getElementById("prog-lbl").textContent = done+" / "+cards.length+" questions repondues";
+}
+document.addEventListener("change", updProg);
+document.addEventListener("input", updProg);
+
+function retour() {
+  document.getElementById("sc-sondage").classList.add("hidden");
+  document.getElementById("sc-merci").classList.add("hidden");
+  document.getElementById("sc-profil").classList.remove("hidden");
+  profil = null;
+  document.getElementById("pc-etudiant").classList.remove("sel");
+  document.getElementById("pc-prof").classList.remove("sel");
+  document.getElementById("pc-admin").classList.remove("sel");
+}
+
+function soumettre() {
+  envoyerReponses();
+  document.getElementById("sc-sondage").classList.add("hidden");
+  document.getElementById("sc-merci").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+function envoyerReponses() {
+  var data = { profil: profil };
+  var cards = document.querySelectorAll(".qcard");
+  for (var i=0; i<cards.length; i++) {
+    var card = cards[i];
+    var id = card.getAttribute("data-id");
+    var radio = card.querySelector("input[type=radio]:checked");
+    var ta = card.querySelector("textarea");
+    var txt = card.querySelector("input[type=text]");
+    var checks = card.querySelectorAll("input[type=checkbox]:checked");
+    var ech = card.querySelector(".ech-btn.on");
+    if (radio) data[id] = radio.parentNode.textContent.trim();
+    else if (ta&&ta.value.trim()) data[id] = ta.value.trim();
+    else if (txt&&txt.value.trim()) data[id] = txt.value.trim();
+    else if (checks.length) {
+      var vals = [];
+      for (var j=0;j<checks.length;j++) vals.push(checks[j].parentNode.textContent.trim());
+      data[id] = vals.join(", ");
+    }
+    else if (ech) data[id] = ech.textContent.trim();
+  }
+  var params = [];
+  for (var key in data) {
+    params.push(encodeURIComponent(key)+"="+encodeURIComponent(data[key]));
+  }
+  var url = SCRIPT_URL + "?" + params.join("&");
+  var img = new Image();
+  img.src = url;
+}
+
+function copier() {
+  var url = document.getElementById("share-url").textContent;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){
+      var ok = document.getElementById("copy-ok");
+      ok.style.display = "block";
+      setTimeout(function(){ ok.style.display="none"; }, 3000);
     });
   }
-
-  div.innerHTML=html;
-  box.appendChild(div);
- });
-
- updateProgress();
 }
-
-function updateProgress(){
- const total=document.querySelectorAll(".qcard").length;
- const filled=document.querySelectorAll("input:checked, input[type=text]").length;
-
- document.getElementById("bar").style.width=(filled/total)*100+"%";
-}
-
-document.addEventListener("change",updateProgress);
-document.addEventListener("input",updateProgress);
-
-function submit(){
-
- let res={profil};
-
- document.querySelectorAll(".qcard").forEach((card,i)=>{
-
-  let text=card.querySelector("input[type=text]");
-  let radio=card.querySelector("input:checked");
-
-  if(text) res["q"+i]=text.value;
-  if(radio) res["q"+i]=radio.value;
-
- });
-
- fetch("/api/submit",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify(res)
- });
-
- document.getElementById("surveyPage").classList.add("hidden");
- document.getElementById("thanks").classList.remove("hidden");
-}
-
 </script>
-
 </body>
 </html>
